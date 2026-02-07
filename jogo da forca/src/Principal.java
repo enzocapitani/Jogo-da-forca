@@ -4,23 +4,15 @@ import java.util.Random;
 
 public class Principal extends JFrame {
 
-        ImageIcon iconeForca1 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca1.png");
-        ImageIcon iconeForca2 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca2.png");
-        ImageIcon iconeForca3 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca3.png");
-        ImageIcon iconeForca4 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca4.png");
-        ImageIcon iconeForca5 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca5.png");
-        ImageIcon iconeForca6 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca6.png");
-        ImageIcon iconeForca7 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca7.png");
-        ImageIcon iconeForca8 = new ImageIcon(
-                        "C:/Users/mauri/OneDrive/Área de Trabalho/Projetos/Jogo da forca/jogo da forca/src/sprites/forca8.png");
-
+        // Troque os caminhos absolutos por este formato:
+        ImageIcon iconeForca1 = new ImageIcon(getClass().getResource("/sprites/forca1.png"));
+        ImageIcon iconeForca2 = new ImageIcon(getClass().getResource("/sprites/forca2.png"));
+        ImageIcon iconeForca3 = new ImageIcon(getClass().getResource("/sprites/forca3.png"));
+        ImageIcon iconeForca4 = new ImageIcon(getClass().getResource("/sprites/forca4.png"));
+        ImageIcon iconeForca5 = new ImageIcon(getClass().getResource("/sprites/forca5.png"));
+        ImageIcon iconeForca6 = new ImageIcon(getClass().getResource("/sprites/forca6.png"));
+        ImageIcon iconeForca7 = new ImageIcon(getClass().getResource("/sprites/forca7.png"));
+        ImageIcon iconeForca8 = new ImageIcon(getClass().getResource("/sprites/forca8.png"));
         JLabel imagem = new JLabel(iconeForca1);
 
         Player p = new Player();
