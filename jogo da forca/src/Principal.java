@@ -103,22 +103,26 @@ public class Principal extends JFrame {
                 botaoEnviar.addActionListener(e -> {
 
                         boolean tentativaFalha = true;
-
-                        for (int i = 0; i < palavraEscolhida.length(); i++) {
-                                if (tentativaTxt.getText().charAt(0) == palavraEscolhida.charAt(i)) {
-                                        alterarPalavra();
-                                        verificarVitoria();
-                                        tentativaFalha = false;
-                                        break;
+                        if (tentativaTxt.getText().trim().equals("")) {
+                                JOptionPane.showMessageDialog(this, "Digite uma letra");
+                                tentativaFalha = false;
+                        } else {
+                                for (int i = 0; i < palavraEscolhida.length(); i++) {
+                                        if (tentativaTxt.getText().charAt(0) == palavraEscolhida.charAt(i)) {
+                                                alterarPalavra();
+                                                verificarVitoria();
+                                                tentativaFalha = false;
+                                                break;
+                                        }
                                 }
                         }
                         if (tentativaFalha == true) {
-                                if (p.getVida() == 0) {
+                                p.setVida(p.getVida() - 1);
+                                labelVida.setText(String.valueOf("Vida: " + p.getVida()));
+                                if (p.getVida() < 1) {
                                         mudarImagem();
                                         perderJogo();
                                 }
-                                p.setVida(p.getVida() - 1);
-                                labelVida.setText(String.valueOf("Vida: " + p.getVida()));
                                 mudarImagem();
                         }
 
@@ -170,27 +174,30 @@ public class Principal extends JFrame {
 
                 palavraEscolhida = palavras[num];
 
-                System.out.println(palavraEscolhida);
+                // System.out.println(palavraEscolhida);
         }
 
         public void alterarPalavra() {
 
                 StringBuilder sb = new StringBuilder();
+                int contador = 0;
 
                 for (int i = 0; i < palavraEscolhida.length() * 2; i++) {
-
                         if (i % 2 == 0) {
-
-                                if (tentativaTxt.getText().charAt(0) == palavraEscolhida.charAt(i)) {
+                                // se texto da tentativa for igual ao caractere da palavra escolhida no indice
+                                // contador
+                                if (tentativaTxt.getText().charAt(0) == palavraEscolhida.charAt(contador)) {
                                         if (palavraTotal.getText().charAt(i) == '_') {
                                                 sb.append(tentativaTxt.getText().charAt(0));
                                         } else {
-                                                sb.append("_");
+                                                sb.append(palavraEscolhida.charAt(contador));
                                         }
+                                        contador++;
                                 } else {
                                         sb.append(palavraTotal.getText().charAt(i));
+                                        contador++;
                                 }
-                        }else{
+                        } else {
                                 sb.append(" ");
                         }
                 }
@@ -202,25 +209,32 @@ public class Principal extends JFrame {
         public void verificarVitoria() {
                 StringBuilder sb = new StringBuilder();
 
-                for (int i = 0; i < palavraEscolhida.length(); i++) {
-                        sb.append(palavraTotal.getText().charAt(i));
+                for (int i = 0; i < palavraEscolhida.length() * 2; i++) {
+                        if (i % 2 == 0) {
+                                sb.append(palavraTotal.getText().charAt(i));
+                        }
                 }
 
                 if (sb.toString().equals(palavraEscolhida)) {
                         JOptionPane.showMessageDialog(this,
-                                        "Você ganhou o jogo, a palavra era : " + palavraTotal.getText());
+                                        "Você ganhou o jogo, a palavra era : " + sb.toString());
                         resetarJogo();
                 }
         }
 
         public void resetarJogo() {
                 gerarPalavra();
-                p.setVida(7);
+                p.setVida(6);
+                labelVida.setText("Vida: " + p.getVida());
 
                 StringBuilder sb = new StringBuilder();
 
-                for (int i = 0; i < palavraEscolhida.length(); i++) {
-                        sb.append('_');
+                for (int i = 0; i < palavraEscolhida.length() * 2; i++) {
+                        if (i % 2 == 0) {
+                                sb.append("_");
+                        } else {
+                                sb.append(" ");
+                        }
                 }
 
                 palavraTotal.setText(sb.toString());
